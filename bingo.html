@@ -96,6 +96,45 @@
             </tr>
         </tbody>
     </table>
+
+    <script type="text/javascript">
+        var cartelaB = [];
+        var cartelaI = [];
+        var cartelaN = [];
+        var cartelaG = [];
+        var cartelaO = [];
+
+        function GerrarArray (NumeroInicial , quantidade){
+            var retorno =[]
+            for (var i=0 ; i < quantidade; i++){
+                retorno.push(NumeroInicial)
+                NumeroInicial++;
+            }
+            return retorno
+        }
+
+        cartelaB = GerrarArray (1,15);
+        console.log("array da coluna B");
+        console.log(cartelaB); 
+
+        cartelaI = GerrarArray (16,15);
+        console.log("array da coluna I");
+        console.log(cartelaI);
+
+        cartelaN = GerrarArray (31,15);
+        console.log("array da coluna N");
+        console.log(cartelaN);
+
+        cartelaG = GerrarArray (46,15);
+        console.log("array da coluna G");
+        console.log(cartelaG);
+
+        cartelaO = GerrarArray (61,15);
+        console.log("array da coluna O");
+        console.log(cartelaO);
+
+
+    </script>
     
 </body>
 </html>
