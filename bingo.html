@@ -16,6 +16,7 @@
             align-items: center;
         }
         td, th{
+            width: 6px 18px;
             font-size: 55px;
             padding: 6px 18px;
             text-align: center;
@@ -95,6 +96,10 @@
                 <td id="o5">75</td>
             </tr>
         </tbody>
+
+        <button onclick="GerarCartela()">
+            gerar cartela
+        </button>
     </table>
 
     <script type="text/javascript">
@@ -149,6 +154,28 @@
                 elemento.style.backgroundColor= 'red';
             }
             
+        }
+
+        function GerarCartela()
+        {
+            for(var i = 1; i<=5 ; i++){
+
+                var td = document.getElementById("b"+i)
+                td.innerText = cartelaB[i]
+
+                var td = document.getElementById("i"+i)
+                td.innerText = cartelaI[i]
+
+                var td = document.getElementById("n"+i)
+                td.innerText = cartelaN[i]
+
+                var td = document.getElementById("g"+i)
+                td.innerText = cartelaG[i]
+
+                var td = document.getElementById("o"+i)
+                td.innerText = cartelaO[i]
+            }
+
         }
 
     </script>
