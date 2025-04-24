@@ -118,26 +118,6 @@
             return retorno
         }
 
-        cartelaB = GerrarArray (1,15);
-        console.log("array da coluna B");
-        console.log(cartelaB); 
-
-        cartelaI = GerrarArray (16,15);
-        console.log("array da coluna I");
-        console.log(cartelaI);
-
-        cartelaN = GerrarArray (31,15);
-        console.log("array da coluna N");
-        console.log(cartelaN);
-
-        cartelaG = GerrarArray (46,15);
-        console.log("array da coluna G");
-        console.log(cartelaG);
-
-        cartelaO = GerrarArray (61,15);
-        console.log("array da coluna O");
-        console.log(cartelaO);
-
         var b1 =document.getElementById("b1");
         console.log(b1);
         
@@ -158,6 +138,16 @@
 
         function GerarCartela()
         {
+            cartelaB = MisturarArrey(GerrarArray (1,15));
+
+            cartelaI = MisturarArrey(GerrarArray (16,15));
+
+            cartelaN = MisturarArrey(GerrarArray (31,15));
+
+            cartelaG = MisturarArrey(GerrarArray (46,15));
+            
+            cartelaO = MisturarArrey(GerrarArray (61,15));
+
             for(var i = 1; i<=5 ; i++){
 
                 var td = document.getElementById("b"+i)
@@ -178,6 +168,31 @@
 
         }
 
+        function NumeroAleatorio(numeroMinimo, numeroMaximo){
+            var retorno = Math.floor(Math.random() * numeroMaximo)
+            if (retorno > 0 && retorno >= numeroMinimo && retorno<= numeroMaximo){
+                return retorno
+            }
+            else {
+                return NumeroAleatorio (numeroMinimo, numeroMaximo)
+            }
+        }
+
+        function MisturarArrey(array){
+            var aleatorio 
+            var cont = array.length
+            var auxiliar
+            while (cont !=0 )
+            {
+                aleatorio = NumeroAleatorio(1, array.length)
+                cont--
+                auxiliar = array [cont]
+                array [cont]= array[aleatorio]
+                array[aleatorio]= auxiliar
+            }
+            return array 
+
+        }
     </script>
     
 </body>
