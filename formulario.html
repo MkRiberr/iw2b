@@ -8,7 +8,7 @@
 <body>
     <form action="salvar.html" method="post">
         <label>Cep</label>
-        <input type="text" name="cep" id="cep" class="campo" /><br><br>
+        <input type="text" name="cep" value="" id="cep" class="campo" /><br><br>
         <label>Endereço</label>
         <input type="text" name="endereco" id="endereco" class="campo" /> <br><br>
         <label>Número</label>
@@ -23,6 +23,17 @@
             Enviar dados
         </button>
     </form>
+
+    <script>
+        function ValidarFormulario()
+        {
+            var cep = document.getElementById('cep')
+            if(cep.value == "")
+            {
+                alert
+            }
+        }
+    </script>
  
 </body>
 </html>
