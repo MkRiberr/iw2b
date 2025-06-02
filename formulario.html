@@ -6,7 +6,7 @@
     <title>Formularios</title>
 </head>
 <body>
-    <form action="salvar.html" method="post">
+    <form action="salvar.html" method="post" onsubmit="return ValidarFormulario()">
         <label>Cep</label>
         <input type="text" name="cep" value="" id="cep" class="campo" /><br><br>
         <label>Endereço</label>
@@ -25,15 +25,62 @@
     </form>
 
     <script>
-        function ValidarFormulario()
-        {
+    function ValidarFormulario()
+        {   
             var cep = document.getElementById('cep')
-            if(cep.value == "")
-            {
-                alert
+            if (cep.value == "") {
+                alert('Campo CEP deve ser preenchido')
+                cep.style.borderColor = 'red'
+                cep.style.borderWidth = '2px'
+                return false
+            }
+
+        
+            var endereco = document.getElementById ('endereco')
+            if (endereco.value == "") {
+                alert('Campo Endereço deve ser preenchido')
+                endereco.style.borderColor = 'red'
+                endereco.style.borderWidth = '2px'
+                return false
+            }
+
+
+            var numero = document.getElementById('numero')
+            if (numero.value == "") {
+                alert('Campo número deve ser preenchido')
+                numero.style.borderColor = 'red'
+                numero.style.borderWidth = '2px'
+                return false
+            }
+
+    
+            var bairro = document.getElementById ('bairro')
+            if (bairro.value == "") {
+                alert('Campo bairro deve ser preenchido')
+                bairro.style.borderColor = 'red'
+                bairro.style.borderWidth = '2px'
+                return false
+            }
+
+            
+            var cidade = document.getElementById('cidade')
+            if (cidade.value == "") {
+                alert('Campo cidade deve ser preenchido')
+                cidade.style.borderColor = 'red'
+                cidade.style.borderWidth = '2px'
+                return false
+            }
+
+            
+            var estado = document.getElementById ('estado')
+            if (estado.value == "") {
+                alert('Campo estado deve ser preenchido')
+                estado.style.borderColor = 'red'
+                estado.style.borderWidth = '2px'
+                return false
             }
         }
-    </script>
+    </script>
  
 </body>
 </html>
