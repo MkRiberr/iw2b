@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+</head>
+<body>
+    <div id="resultado"></div>
+
+    <script>
+        
+        var carro = {
+            marca: "Mitsubishi",
+            modelo: "Eclipse",
+            ano: 1998
+        };
+
+        document.write(`Modelo do primeiro carro: ${carro.modelo}<br>`);
+
+        carro.ano = 2000;
+
+        carro.cor = "vermelho";
+
+        var carro2 = {
+            marca: "Toyota",
+            modelo: "Supra Mk4",
+            ano: 2002,
+            cor: "preto"
+        };
+
+        var carro3 = {
+            marca: "Chevrolet",
+            modelo: "Corvette C5",
+            ano: 1999,
+            cor: "preto"
+        };
+
+        var resultado = document.getElementById('resultado');
+        resultado.innerText = `Cores dos carros:
+            Carro 1: ${carro.cor}
+            Carro 2: ${carro2.cor}
+            Carro 3: ${carro3.cor}`;
+
+        var pessoa = {
+            endereco: {
+                rua: "Rua Paulino Raphael",
+                numero: 198,
+                cidade: "Bauru"
+            }
+        };
+
+        document.write(`<br>Cidade da pessoa: ${pessoa.endereco.cidade}`);
+    </script>
+</body>
+</html>
