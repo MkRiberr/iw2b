@@ -201,7 +201,47 @@ main {
         pokemonName2.innerHTML = data.name;
         pokemonNumber2.innerHTML = data.id;
         pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
-        pokemonType.innerHTML = data.types.map(type => type.type.name).join(', ');
+
+        
+        pokemonType.innerHTML = data.types.map((type) => { 
+          if(type.type.name == "normal"){
+              return "<img src='icons/normal.svg'/>"
+          }
+          if(type.type.name == "bug"){
+              return "<img src='icons/bug.svg'/>"
+          }
+          if(type.type.name == "dark"){
+              return "<img src='icons/normal.svg'/>"
+          }
+          if(type.type.name == "dragon"){
+              return "<img src='icons/dragon.svg'/>"
+          }
+          if(type.type.name == "electric"){
+              return "<img src='icons/electric.svg'/>"
+          }
+          if(type.type.name == "fairy"){
+              return "<img src='icons/fairy.svg'/>"
+          }
+          if(type.type.name == "fighting"){
+              return "<img src='icons/fighting.svg'/>"
+          }
+          if(type.type.name == "flying"){
+              return "<img src='icons/.svg'/>"
+          }
+          if(type.type.name == "poison"){
+              return "<img src='icons/poison.svg'/>"
+          }
+          
+
+          console.log(type.type.name)
+          if(type.type.name == "fire"){
+              return "<img src='icons/fire.svg'/>"
+          }else{
+            "oiiiiiiiiiiiiiiiiiii"
+          }
+      }).join(', ');
+
+
         input.value = '';
         searchPokemon = data.id;
     } else {
