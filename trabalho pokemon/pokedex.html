@@ -53,21 +53,33 @@ main {
 .pokemon__data2{
   position: absolute;
   font-size: 60%;
-  top: 55.5%;
-  right: 55.9%;
+  top: 55%;
+}
 
+#pokemonNumberContainer {
+  position: absolute;
+  font-size: 58%;
+  top: 55.8%; /* Ajuste para mover o número mais para cima */
+  right: 55%; /* Ajuste conforme necessário */
+}
+
+#pokemonNameContainer {
+  position: absolute;
+  font-size: 58%;
+  top: 59%; /* Ajuste para mover o nome abaixo do número */
+  right: 50%; /* Ajuste conforme necessário */
 }
 
 .pokemon__name {
-  color: #3a444d;
+  color: #000000;
   text-transform: capitalize;
 }
 
 .form {
   position: absolute;
   width: 65%;
-  top: 65%;
-  left: 13.5%;
+  top: 100%;
+  left: 16.5%;
 }
 
 .input__search {
@@ -84,24 +96,25 @@ main {
 
 .buttons {
   position: absolute;
-  bottom: 10%;
+  bottom: 6.6%;
   left: 50%;
-  width: 65%;
-  transform: translate(-57%, 0);
+  width: 40%;
+  transform: translate(-50%, 0); /* Centraliza horizontalmente */
   display: flex;
-  gap: 20px;
+  justify-content: center; /* Centraliza os botões dentro do contêiner */
+  gap: 40%; /* Espaçamento entre os botões */
 }
 
 .button {
-  width: 50%;
-  padding: 4%;
+  width: 60%; /* Ajusta o tamanho do botão ao conteúdo */
+  padding: 0%; /* Ajusta o espaçamento interno */
   border: 2px solid #000;
   border-radius: 5px;
-  font-size: clamp(8px, 5vw, 1rem);
+  font-size: 1rem; /* Ajusta o tamanho da fonte */
   font-weight: 600;
   color: white;
   background-color: #444;
-  box-shadow: -2px 3px 0 #222, -4px 6px 0 #000;
+  text-align: center; /* Centraliza o texto dentro do botão */
 }
 
 .button:active {
@@ -115,17 +128,21 @@ main {
     <img src="#" alt="pokemon" class="pokemon__image">
 
     <h1 class="pokemon__data">
-      <span class="pokemon__number"></span> -
-      <span class="pokemon__name"></span>
+      <span class="pokemon__number" id="pokemonNumber1"></span> -
+      <span class="pokemon__name" id="pokemonName1"></span>
     </h1>
 
+    <h1 class="pokemon__data2" id="pokemonNumberContainer">
+      <span class="pokemon__number" id="pokemonNumber2"></span>
+    </h1>
+    <h1 class="pokemon__data2" id="pokemonNameContainer">
+      <span class="pokemon__name" id="pokemonName2"></span>
+    </h1>
     <h1 class="pokemon__data2">
-      <span class="pokemon__number" id="ui1"></span>
-      <span class="pokemon__name" id="ui2"></span>
+      <span class="pokemon__type" id="pokemonType"></span>
     </h1>
     
-    
-
+  
     <form class="form">
       <input
         type="search"
@@ -147,11 +164,16 @@ main {
     const pokemonNumber = document.querySelector('.pokemon__number');
     const pokemonImage = document.querySelector('.pokemon__image');
 
+    const pokemonName1 = document.querySelector('#pokemonName1');
+    const pokemonNumber1 = document.querySelector('#pokemonNumber1');
+    const pokemonName2 = document.querySelector('#pokemonName2');
+    const pokemonNumber2 = document.querySelector('#pokemonNumber2');
 
     const form = document.querySelector('.form');
     const input = document.querySelector('.input__search');
     const buttonPrev = document.querySelector('.btn-prev');
     const buttonNext = document.querySelector('.btn-next');
+    const pokemonType = document.querySelector('.pokemon__type');
 
     let searchPokemon = 1;
 
@@ -165,23 +187,29 @@ main {
     }
 
     const renderPokemon = async (pokemon) => {
-
-    pokemonName.innerHTML = 'Loading...';
-    pokemonNumber.innerHTML = '';
+    pokemonName1.innerHTML = 'Loading...';
+    pokemonNumber1.innerHTML = '';
+    pokemonName2.innerHTML = 'Loading...';
+    pokemonNumber2.innerHTML = '';
 
     const data = await fetchPokemon(pokemon);
 
     if (data) {
         pokemonImage.style.display = 'block';
-        pokemonName.innerHTML = data.name;
-        pokemonNumber.innerHTML = data.id;
+        pokemonName1.innerHTML = data.name;
+        pokemonNumber1.innerHTML = data.id;
+        pokemonName2.innerHTML = data.name;
+        pokemonNumber2.innerHTML = data.id;
         pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+        pokemonType.innerHTML = data.types.map(type => type.type.name).join(', ');
         input.value = '';
         searchPokemon = data.id;
     } else {
         pokemonImage.style.display = 'none';
-        pokemonName.innerHTML = 'Not found :c';
-        pokemonNumber.innerHTML = '';
+        pokemonName1.innerHTML = 'Not found :c';
+        pokemonNumber1.innerHTML = '';
+        pokemonName2.innerHTML = 'Not found :c';
+        pokemonNumber2.innerHTML = '';
     }
     }
 
