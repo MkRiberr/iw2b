@@ -59,15 +59,15 @@ main {
 #pokemonNumberContainer {
   position: absolute;
   font-size: 58%;
-  top: 55.8%; /* Ajuste para mover o número mais para cima */
-  right: 55%; /* Ajuste conforme necessário */
+  top: 55.8%;
+  right: 55%;
 }
 
 #pokemonNameContainer {
   position: absolute;
   font-size: 58%;
-  top: 59%; /* Ajuste para mover o nome abaixo do número */
-  right: 50%; /* Ajuste conforme necessário */
+  top: 59%;
+  right: 50%;
 }
 
 .pokemon__name {
@@ -99,27 +99,36 @@ main {
   bottom: 6.6%;
   left: 50%;
   width: 40%;
-  transform: translate(-50%, 0); /* Centraliza horizontalmente */
+  transform: translate(-50%, 0);
   display: flex;
-  justify-content: center; /* Centraliza os botões dentro do contêiner */
-  gap: 40%; /* Espaçamento entre os botões */
+  justify-content: center;
+  gap: 40%;
 }
 
 .button {
-  width: 60%; /* Ajusta o tamanho do botão ao conteúdo */
-  padding: 0%; /* Ajusta o espaçamento interno */
+  width: 60%;
+  padding: 0%;
   border: 2px solid #000;
   border-radius: 5px;
-  font-size: 1rem; /* Ajusta o tamanho da fonte */
+  font-size: 1rem;
   font-weight: 600;
   color: white;
   background-color: #444;
-  text-align: center; /* Centraliza o texto dentro do botão */
+  text-align: center;
 }
 
 .button:active {
   box-shadow: inset -4px 4px 0 #222;
   font-size: 0.9rem;
+}
+
+.pokemon__type {
+  margin-left: -15.5%;
+}
+
+.pokemon__type img {
+  width: 3%;
+  margin-top: 6.9%;
 }
 </style>
 <body>
@@ -226,11 +235,36 @@ main {
               return "<img src='icons/fighting.svg'/>"
           }
           if(type.type.name == "flying"){
-              return "<img src='icons/.svg'/>"
+              return "<img src='icons/flying.svg'/>"
           }
           if(type.type.name == "poison"){
               return "<img src='icons/poison.svg'/>"
           }
+          if(type.type.name == "ghost"){
+              return "<img src='icons/ghost.svg'/>"
+          }
+          if(type.type.name == "grass"){
+              return "<img src='icons/grass.svg'/>"
+          }
+          if(type.type.name == "ground"){
+              return "<img src='icons/ground.svg'/>"
+          }
+          if(type.type.name == "ice"){
+              return "<img src='icons/ice.svg'/>"
+          }
+          if(type.type.name == "psychic"){
+              return "<img src='icons/psychic.svg'/>"
+          }
+          if(type.type.name == "rock"){
+              return "<img src='icons/rock.svg'/>"
+          }
+          if(type.type.name == "steel"){
+              return "<img src='icons/steel.svg'/>"
+          }
+          if(type.type.name == "water"){
+              return "<img src='icons/water.svg'/>"
+          }
+
           
 
           console.log(type.type.name)
