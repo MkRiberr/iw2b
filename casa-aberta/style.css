@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("https://b2442349.smushcdn.com/2442349/wp-content/uploads/2021/08/Screenshot_8-1-1024x631.jpg?lossy=1&strip=1&webp=1");
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #4d4d4d;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #202020;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #4d4d4d;
+  }
+  
+  th {
+    background-color: #555555;
+  }
+  
+  td {
+    font-size: 14px;
+  }
+  
+  .disponivel {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .indisponivel {
+    color: red;
+    font-weight: bold;
+  }
+
+  .texto {
+    color: #ffffff;
+  }
