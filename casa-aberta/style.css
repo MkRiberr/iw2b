@@ -51,3 +51,17 @@ body {
   .texto {
     color: #ffffff;
   }
+
+  html,body{
+    margin: 0; 
+    padding: 0;
+  }
+
+  .container {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  #propaganda {
+    width: 20%;
+    margin: 20px;
+  }
