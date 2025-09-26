@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>frontend</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url(https://wallpapers.com/images/hd/minecraft-aesthetic-tree-park-xwbol98mp7yal632.jpg);
+    color: #e0e0e0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.8;
+  }
+
+  
+
+  h1 {
+    color: #00e0ff;
+    text-shadow: 0 0 8px #00e0ff;
+    margin-bottom: 20px;
+  }
+
+  input, select {
+    background: #1a1a1d;
+    border: 1px solid #2a2a30;
+    color: #e0e0e0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.3s;
+  }
+
+  input:focus, select:focus {
+    border-color: #00e0ff;
+    box-shadow: 0 0 6px #00e0ff;
+    outline: none;
+  }
+
+  button {
+    background: linear-gradient(135deg, #00e0ff, #7b2fff);
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s, opacity 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    background: #1a1a1d;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.2);
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2a2a30;
+  }
+
+  th {
+    background: #111116;
+    color: #00e0ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  tr:hover {
+    background: rgba(0, 224, 255, 0.05);
+  }
+
+  td button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+  }
+
+  td button:nth-child(1) {
+    background: linear-gradient(135deg, #00e0ff, #0094ff);
+  }
+
+  td button:nth-child(2) {
+    background: linear-gradient(135deg, #ff004c, #ff2f7b);
+  }
+  nav {
+    background-color: #b9b9b9;
+    width: 100%;
+  }
+
+  nav img {
+  height: 50px;       
+  margin-left: 10px;  
+  vertical-align: middle;
+}
+
+
+  </style>
+</head>
+  <body>
+    <center>
+      <nav class="header">
+        <img src="/assets/2.png" alt="Logo RUSH">
+      </nav>
+      
+    </center>
+   
+    <center><h1>Gerenciamento de Usuários</h1></center>
+
+    
+    <div>
+      <input type="hidden" id="id">
+      <input type="text" id="login" placeholder="Login">
+      <input type="text" id="nome" placeholder="Nome">
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="senha" placeholder="Senha">
+      <select id="ativo">
+        <option value="1">Ativo</option>
+        <option value="0">inativo</option>
+      </select>
+      <button onclick="salvar()">salvar</button>
+      <button onclick="limpar()">Cancelar</button>
+    </div>
+
+
+    <div>
+      <input type="text" id="pesquisa" placeholder="Pesquisar por login ou nome">
+      <button onclick="carregarPesquisa()">Pesquisar</button>
+      <button onclick="carregar()">listar todos</button>
+    </div>
+
+
+
+    <table id="tabela">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Login</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Ativo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+
+        const API_URL = "https://localhost/trabalho/usuarios.php";
+
+        function carregar(pesquisa = ""){
+            let url = API_URL;
+            if (pesquisa) {
+                url += "?pesquisa=" + encodeURIComponent(pesquisa);
+            }
+            fetch(url)
+               .then(resposta => resposta.json())
+               .then(dados => {
+                console.log(dados)
+                dados.forEach(usuario =>{
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                                    <td>${usuario.id}</td>
+                                    <td>${usuario.login}</td>
+                                    <td>${usuario.nome}</td>
+                                    <td>${usuario.email}</td>
+                                    <td>${usuario.ativo == 1 ? "Sim" : "Não"}</td>
+                                    <td>
+                                        <button onclick='editar(${JSON.stringify(usuario)})'> Editar </button>
+                                        <button onclick='excluir(${usuario.id})'> excluir </button>
+                                    </td>
+                                    `;
+                    tbody.appendChild(tr);
+                });
+               })
+
+               const tbody = document.querySelector("#tabela tbody")
+        }
+
+        function carregarPesquisa(){
+            const valor = document.getElementById("pesquisa").value;
+            carregar(valor);
+        }
+
+        async function salvar() {
+            const id = document.getElementById("id").value;
+            const login = document.getElementById("login").value;
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+            const ativo = document.getElementById("ativo").value;
+            
+            const payload = {ID: id, LOGIN:login, NOME:nome, EMAIL:email, SENHA:senha, ATIVO:ativo};
+
+            if (id){
+                await fetch(API_URL, { method:"PUT", body: JSON.stringify(payload)});
+            } else {
+                await fetch(API_URL, {method:"POST", body: JSON.stringify(payload)});
+            }
+             
+            limpar();
+            carregar();
+        }   
+
+        function editar(usuario){
+            document.getElementById("id").value = usuario.id;
+            document.getElementById("login").value = usuario.login;
+            document.getElementById("nome").value = usuario.nome;
+            document.getElementById("email").value = usuario.email;
+            document.getElementById("senha").value = usuario.senha;
+            document.getElementById("ativo").value = usuario.ativo;
+        }
+
+        async function excluir(id){
+            if (confirm("Tem certeza que quer excluir esse user?")){
+                await fetch(API_URL + "?id=" + id, {method:"DELETE"});
+                carregar();
+            }
+        }
+
+        function limpar(){
+            document.getElementById("id").value =  "";
+            document.getElementById("login").value =  "";
+            document.getElementById("nome").value = "";
+            document.getElementById("email").value =  "";
+            document.getElementById("senha").value =  "";
+            document.getElementById("ativo").value =  "1";
+        }
+
+        carregar();
+
+    </script>
+</body>
+</html>
