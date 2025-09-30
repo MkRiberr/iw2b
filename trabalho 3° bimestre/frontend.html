@@ -100,7 +100,7 @@
     background: linear-gradient(135deg, #ff004c, #ff2f7b);
   }
   nav {
-    background-color: #b9b9b9;
+    background-color: #181818;
     width: 100%;
   }
 
@@ -114,23 +114,32 @@
   </style>
 </head>
   <body>
-    <center>
-      <nav class="header">
-        <img src="/assets/2.png" alt="Logo RUSH">
-      </nav>
+    
+
+    
+    <nav class="header">
+      <img src="/trabalho/assets/2.png" alt="Logo RUSH">
+    </nav>
       
+    
+    <br>
+    <br>
+
+    <center>
+      <img src="/trabalho/assets/4.png" id="propaganda" alt="">
     </center>
-   
+    <br>
+    <br>
     <center><h1>Gerenciamento de Usuários</h1></center>
 
     
     <div>
-      <input type="hidden" id="id">
-      <input type="text" id="login" placeholder="Login">
-      <input type="text" id="nome" placeholder="Nome">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="senha" placeholder="Senha">
-      <select id="ativo">
+      <input type="hidden" id="ID">
+      <input type="text" id="Login" placeholder="Login">
+      <input type="text" id="Nome" placeholder="Nome">
+      <input type="email" id="Email" placeholder="Email">
+      <input type="password" id="Senha" placeholder="Senha">
+      <select id="Ativo">
         <option value="1">Ativo</option>
         <option value="0">inativo</option>
       </select>
@@ -163,13 +172,15 @@
 
     <script>
 
-        const API_URL = "https://localhost/trabalho/usuarios.php";
+        const API_URL = "http://localhost:8081/trabalho/usuarios.php";
 
         function carregar(pesquisa = ""){
             let url = API_URL;
             if (pesquisa) {
                 url += "?pesquisa=" + encodeURIComponent(pesquisa);
             }
+            const tbody = document.querySelector("#tabela tbody")
+            tbody.innerHTML = ""
             fetch(url)
                .then(resposta => resposta.json())
                .then(dados => {
@@ -177,21 +188,21 @@
                 dados.forEach(usuario =>{
                     const tr = document.createElement("tr");
                     tr.innerHTML = `
-                                    <td>${usuario.id}</td>
-                                    <td>${usuario.login}</td>
-                                    <td>${usuario.nome}</td>
-                                    <td>${usuario.email}</td>
-                                    <td>${usuario.ativo == 1 ? "Sim" : "Não"}</td>
+                                    <td>${usuario.ID}</td>
+                                    <td>${usuario.Login}</td>
+                                    <td>${usuario.Nome}</td>
+                                    <td>${usuario.Email}</td>
+                                    <td>${usuario.Ativo == 1 ? "Sim" : "Não"}</td>
                                     <td>
                                         <button onclick='editar(${JSON.stringify(usuario)})'> Editar </button>
-                                        <button onclick='excluir(${usuario.id})'> excluir </button>
+                                        <button onclick='excluir(${usuario.ID})'> excluir </button>
                                     </td>
                                     `;
                     tbody.appendChild(tr);
                 });
                })
 
-               const tbody = document.querySelector("#tabela tbody")
+              
         }
 
         function carregarPesquisa(){
@@ -200,19 +211,23 @@
         }
 
         async function salvar() {
-            const id = document.getElementById("id").value;
-            const login = document.getElementById("login").value;
-            const nome = document.getElementById("nome").value;
-            const email = document.getElementById("email").value;
-            const senha = document.getElementById("senha").value;
-            const ativo = document.getElementById("ativo").value;
+            const id = document.getElementById("ID").value;
+            const login = document.getElementById("Login").value;
+            const nome = document.getElementById("Nome").value;
+            const email = document.getElementById("Email").value;
+            const senha = document.getElementById("Senha").value;
+            const ativo = document.getElementById("Ativo").value;
             
             const payload = {ID: id, LOGIN:login, NOME:nome, EMAIL:email, SENHA:senha, ATIVO:ativo};
 
             if (id){
                 await fetch(API_URL, { method:"PUT", body: JSON.stringify(payload)});
             } else {
-                await fetch(API_URL, {method:"POST", body: JSON.stringify(payload)});
+              console.log(payload)
+              console.log("Oiiiiiiiiiiiiiiiii")
+                await fetch(API_URL, {method:"POST", body: JSON.stringify(payload)}).then(a => a.json()).then(resp => {
+                  console.log(resp);
+                });
             }
              
             limpar();
@@ -220,28 +235,29 @@
         }   
 
         function editar(usuario){
-            document.getElementById("id").value = usuario.id;
-            document.getElementById("login").value = usuario.login;
-            document.getElementById("nome").value = usuario.nome;
-            document.getElementById("email").value = usuario.email;
-            document.getElementById("senha").value = usuario.senha;
-            document.getElementById("ativo").value = usuario.ativo;
+            document.getElementById("ID").value = usuario.ID;
+            document.getElementById("Login").value = usuario.Login;
+            document.getElementById("Nome").value = usuario.Nome;
+            document.getElementById("Email").value = usuario.Email;
+            document.getElementById("Senha").value = usuario.Senha;
+            document.getElementById("Ativo").value = usuario.Ativo;
         }
 
         async function excluir(id){
             if (confirm("Tem certeza que quer excluir esse user?")){
                 await fetch(API_URL + "?id=" + id, {method:"DELETE"});
+               
                 carregar();
             }
         }
 
         function limpar(){
-            document.getElementById("id").value =  "";
-            document.getElementById("login").value =  "";
-            document.getElementById("nome").value = "";
-            document.getElementById("email").value =  "";
-            document.getElementById("senha").value =  "";
-            document.getElementById("ativo").value =  "1";
+            document.getElementById("ID").value =  "";
+            document.getElementById("Login").value =  "";
+            document.getElementById("Nome").value = "";
+            document.getElementById("Email").value =  "";
+            document.getElementById("Senha").value =  "";
+            document.getElementById("Ativo").value =  "1";
         }
 
         carregar();

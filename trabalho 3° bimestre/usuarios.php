@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 }
 
 $method = $_SERVER['REQUEST_METHOD'];
-
+//echo $method;
 switch ($method) {
     case 'GET':
         if (isset($_GET['pesquisa'])) {
@@ -41,10 +41,10 @@ switch ($method) {
 
     case 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
-        $stmt = $conn->prepare("INSERT INTO usuarios (LOGIN, NOME, EMAIL, SENHA, ATIVO) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO usuarios (Login, Nome, Email, Senha, Ativo) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssi", $data['LOGIN'], $data['NOME'], $data['EMAIL'], $data['SENHA'], $data['ATIVO']);
         $stmt->execute();
-
+        
         echo json_encode(["status" => "ok", "insert_id" => $stmt->insert_id]);
         break;
 
